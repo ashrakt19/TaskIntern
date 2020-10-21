@@ -1,0 +1,316 @@
+<app-my-stepper #cdkStepper [linear]="isLinear">
+  <cdk-step label="Personal Details" [editable]="isEditable" [stepControl]=" basicinfo" [optional]="false">
+    <ng-template cdkStepLabel>
+      <span>Basic Info</span>
+    </ng-template>
+    <form (ngSubmit) = "Submit(basicinfo)" [formGroup]="basicinfo">
+      <div class="container">
+        <div class="field is-horizontal">
+          <div class="field-body">
+            <div class="field" >
+              <label class="label">Event Name</label>
+              <p class="control is-expanded has-icons-right">
+                <input formControlName="eventName" class="input" type="text" required>
+                <span *ngIf= "basicinfo.get('eventName').errors?.required" class="text-danger">
+                  Event name requierd
+                </span>
+                <span class="icon is-small is-right">
+                  <i class="fas fa-check"></i>
+                </span>
+                </p>
+            </div>
+            <div class="field">
+              <label class="label">Event Description</label>
+              <p class="control is-expanded has-icons-right">
+                <input formControlName="eventdesc" class="input" type="text" placeholder="Event Description">
+                <span *ngIf= "basicinfo.get('eventdesc').errors?.required" class="text-danger">
+                  Event Description requierd
+                </span>
+                <span class="icon is-small is-right">
+                  <i class="fas fa-check"></i>
+                </span>
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="field">
+          <label class="label">After Payement Message</label>
+          <div class="control has-icons-right">
+            <input formControlName="message" class="input" type="text" placeholder="After Payement Message">
+            <span class="icon is-small is-right">
+              <i class="fas fa-check"></i>
+            </span>
+          </div>
+        </div>
+        <div class="field">
+          <label class="label">Expiry Date </label>
+          <p class="control is-expanded has-icons-right">
+            <input formControlName="expiryDate" class="input" type="text" placeholder="10/2020">
+            <span class="icon is-small is-right">
+              <i class="fas fa-check"></i>
+            </span>
+          </p>
+        </div>
+        <div class="field">
+          <label class="label">Do you want to show this Event on your shop? </label>
+          <p class="control is-expanded has-icons-right">
+            <input class="custom-control-input"  type="radio" value="yes" name="shop"
+                  formControlName="shop" />
+                  <label class="custom-control-label">yes</label>
+          
+                <input class="custom-control-input "  type="radio" value="no" name="shop"
+                  formControlName="shop" />
+                <label class="custom-control-label" >No</label>
+              
+            <span class="icon is-small is-right">
+              <i class="fas fa-check"></i>
+            </span>
+          </p>
+        </div>
+        <div class="field">
+          <label class="label">Payment options: </label>
+          <p class="control is-expanded has-icons-right">
+            <input class="col-lg-4"  type="checkbox" value="Cashthrouthaman" name="PaymentOptions"
+                  formControlName="PaymentOptions" />
+                  <label class="custom-control-label">CashThrouthAman</label>
+          
+                <input class="col-lg-4"  type="checkbox" value="mobile wallet" name="PaymentOptions"
+                  formControlName="PaymentOptions" />
+                <label class="custom-control-label" >Mobile Wallet</label>
+                <input  class="col-lg-4" type="checkbox" value="mezza" name="PaymentOptions"
+                formControlName="PaymentOptions" />
+              <label class="custom-control-label" >Mezza</label>
+            <span class="icon is-small is-right">
+              <i class="fas fa-check"></i>
+            </span>
+          </p>
+        </div>
+        <div class="field">
+          <label class="label">Do you want the fees to be on the buyer? </label>
+          <p class="control is-expanded has-icons-right">
+            <input class="custom-control-input"  type="radio" value="yes" name="fees"
+                  formControlName="fees" />
+                  <label class="custom-control-label">yes</label>
+          
+                <input class="custom-control-input "  type="radio" value="no" name="fees"
+                  formControlName="fees" />
+                <label class="custom-control-label" >No</label>
+              
+            <span class="icon is-small is-right">
+              <i class="fas fa-check"></i>
+            </span>
+          </p>
+        </div>
+        <footer class="my-footer">
+          <div class="buttons">
+            <button [disabled] ="basicinfo.invalid" class="button is-outline is-success" cdkStepperNext>
+              <span> Next</span>
+              <span class="icon medium">
+                <fa-icon [icon]="faChevronRight" size="fa-lg"> </fa-icon>
+              </span>
+            </button>
+          </div>
+        </footer>
+      </div>
+
+    </form>
+  </cdk-step>
+  <cdk-step [editable]= "isEditable" [stepControl]= "Extraform">
+    <ng-template cdkStepLabel>
+      <span>Extra Info</span>
+    </ng-template>
+    <form (ngSubmit) = "Submit(basicinfo)" [formGroup] ="Extraform">
+      <div class="container">
+        <div class="field">
+          <label class="label">Upload Image</label>
+          <p class="control is-expanded has-icons-right">
+            <input type="file" (change)="onFileChanged($event)">
+            <span class="icon is-small is-right">
+              <i class="fas fa-check"></i>
+            </span>
+          </p>
+        </div>
+        <div class="field">
+          <label class="label">Category</label>
+          <p class="control is-expanded has-icons-right">
+            <input formControlName="category" class="input" type="text" placeholder="Category">
+            <span class="icon is-small is-right">
+              <i class="fas fa-check"></i>
+            </span>
+          </p>
+        </div>
+        <div class="field">
+          <label class="label">Event Duration</label>
+          <p class="control is-expanded has-icons-right">
+            <input formControlName="Eventdue" class="input" type="text" placeholder="Event Duration">
+            <span class="icon is-small is-right">
+              <i class="fas fa-check"></i>
+            </span>
+          </p>
+        </div>
+
+        <div class="field">
+          <label class="label">Event Address</label>
+          <div class="control has-icons-right">
+            <input formControlName="adress" class="input" type="text" placeholder="Event address">
+            <span class="icon is-small is-right">
+              <i class="fas fa-check"></i>
+            </span>
+          </div>
+        </div>
+        <div class="field">
+          <label class="label">Event location</label>
+          <div class="control has-icons-right">
+            <input formControlName="location" class="input" type="text" placeholder="Event Location">
+            <span class="icon is-small is-right">
+              <i class="fas fa-check"></i>
+            </span>
+          </div>
+        </div>
+        <div class="field">
+          <label class="label">Facebook Link</label>
+          <div class="control has-icons-right">
+            <input formControlName="fblink" class="input" type="text" placeholder="Facebook Link">
+            <span class="icon is-small is-right">
+              <i class="fas fa-check"></i>
+            </span>
+          </div>
+        </div>
+        <div class="field">
+          <label class="label">Delivery Terms</label>
+          <div class="control has-icons-right">
+            <input formControlName="terms" class="input" type="text" placeholder="Delivery Terms">
+            <span class="icon is-small is-right">
+              <i class="fas fa-check"></i>
+            </span>
+          </div>
+        </div>
+        <div class="field">
+          <label class="label">Return Terms</label>
+          <div class="control has-icons-right">
+            <input formControlName="terms" class="input" type="text" placeholder="Return Terms">
+            <span class="icon is-small is-right">
+              <i class="fas fa-check"></i>
+            </span>
+          </div>
+        </div>
+        <footer class="my-footer">
+          <div class="buttons">
+            <button [disabled]= "!isEditable" type="button" class="button is-outline is-warning" cdkStepperPrevious>
+              <span class="icon medium">
+                <fa-icon [icon]="faChevronLeft"> </fa-icon>
+              </span>
+              <span> Previous</span>
+            </button>
+
+            <button [disabled]= "Extraform.invalid" type="button" class="button is-outline is-primary" cdkStepperNext>
+              <span> Next</span>
+              <span class="icon medium">
+                <fa-icon [icon]="faChevronRight" size="fa-lg"> </fa-icon>
+              </span>
+            </button>
+          </div>
+        </footer>
+      </div>
+    </form>
+  </cdk-step>
+  <cdk-step label="Personal Details" [editable]="isEditable" [stepControl]=" basicinfo" [optional]="false">
+    <ng-template cdkStepLabel>
+      
+      <span>Add Ticket</span>
+    </ng-template>
+    <form (ngSubmit) = "Submit(basicinfo)" [formGroup]="ticketform">
+      <div class="container">
+        <div class="field is-horizontal">
+          <div class="field-body">
+            <div class="field" >
+              <label class="label">Ticket Name</label>
+              <p class="control is-expanded has-icons-right">
+                <input formControlName="ticketName" class="input" type="text" required>
+                <span class="icon is-small is-right">
+                  <i class="fas fa-check"></i>
+                </span>
+                </p>
+            </div>
+            <div class="field">
+              <label class="label">Price</label>
+              <p class="control is-expanded has-icons-right">
+                <input formControlName="Price" class="input" type="text" placeholder="Price">
+                <span class="icon is-small is-right">
+                  <i class="fas fa-check"></i>
+                </span>
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="field">
+          <label class="label">Avilable Quality</label>
+          <div class="control has-icons-right">
+            <input formControlName="quantity" class="input" type="text" placeholder="Avilable Quantity">
+            <span class="icon is-small is-right">
+              <i class="fas fa-check"></i>
+            </span>
+          </div>
+        </div>
+        <div class="field">
+          <label class="label">Max Quantity Per Sell </label>
+          <p class="control is-expanded has-icons-right">
+            <input formControlName="sell" class="input" type="text" >
+            <span class="icon is-small is-right">
+              <i class="fas fa-check"></i>
+            </span>
+          </p>
+        </div>
+        <div class="field">
+          <label class="label">Ticket Description </label>
+          <p class="control is-expanded has-icons-right">
+            <input formControlName="Tdesc" class="input" type="text" >
+            <span class="icon is-small is-right">
+              <i class="fas fa-check"></i>
+            </span>
+          </p>
+        </div>
+        <div class="field">
+          <label class="label">Ticket Expiry </label>
+          <p class="control is-expanded has-icons-right">
+            <input formControlName="expiry" class="input" type="text" >
+            <span class="icon is-small is-right">
+              <i class="fas fa-check"></i>
+            </span>
+          </p>
+        </div>
+        
+       
+        
+        <footer class="my-footer">
+          <div class="buttons">
+            <button [disabled] ="ticketform.invalid" class="button is-outline is-primary" cdkStepperNext>
+              <span> Next</span>
+              <span class="icon medium">
+                <fa-icon [icon]="faChevronRight" size="fa-lg"> </fa-icon>
+              </span>
+            </button>
+          </div>
+        </footer>
+      </div>
+
+    </form>
+  </cdk-step>
+  
+  <cdk-step label="Personal Details" [editable]="isEditable" [optional]="false">
+    <ng-template cdkStepLabel>
+      <span>Buyers Information</span>
+    </ng-template>
+    
+        <footer class="my-footer">
+          <div class="buttons">
+            <button [disabled] ="basicinfo.invalid" class="button is-outline is-success" cdkStepperNext>
+              <span> Next</span>
+              <span class="icon medium">
+                <fa-icon [icon]="faChevronRight" size="fa-lg"> </fa-icon>
+              </span>
+            </button>
+          </div>
+        </footer>
+  </cdk-step>
+</app-my-stepper>
